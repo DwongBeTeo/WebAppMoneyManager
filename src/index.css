@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+/* cái nay khong dung, không dùng @apply trong @utility */
+/* @utility add-btn  {
+    @apply px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700;
+} */
+
+@layer components {
+  .card {
+    @apply bg-white rounded-lg p-4 shadow-md;  /* Match card trắng, rounded, padding, shadow nhẹ */
+  }
+
+  .card-btn {
+    @apply flex items-center gap-2 px-3 py-1.5 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors;  /* Match nút light purple bg, text purple, rounded, hover */
+  }
+  .add-btn {
+    @apply px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700;
+  }
+}
+
+body{
+  font-family: 'Outfit', sans-serif;
+  background-color: #fff7fb;
+  /* background-color: #e9ecef; */
+  overflow-x: hidden;
+}
