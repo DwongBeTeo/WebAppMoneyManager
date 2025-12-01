@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 const Modal = ({isOpen, onClose, children, title}) => {
     if(!isOpen) return null;
     return (
-        // form thêm mới 
+        // form thêm mới (form nổi bọt)
         <div className="fixed inset-0 z-50 flex items-center justify-center w-full h-full overflow-hidden bg-black/40 backdrop-blur-sm">
             <div className="relative p-4 w-full max-w-2xl max-h-[90vh]">
                 {/* Modal header */}

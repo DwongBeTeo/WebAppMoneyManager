@@ -8,6 +8,7 @@ import Modal from "../components/Modal";
 import { Plus } from "lucide-react";
 import toast from "react-hot-toast";
 import AddInComeForm from "../components/Income/AddIncomeForm";
+import DeleteAlert from "../components/DeleteAlert";
 const Income = () => {
     UseUser();
     const [incomeData, setIncome] = useState([]);
@@ -20,7 +21,7 @@ const Income = () => {
         data: null,
     });
 
-    // Fetch Income details from the API
+    // Fetch all Income details from the API
     const fetchIncomeDetails = async () => {
         if (loading) return;
         setLoading(true);
@@ -85,6 +86,23 @@ const Income = () => {
         }
     }
 
+    // delete income details
+    const deleteIncome = async (id) => {
+        try {
+            const response = await axiosConfig.delete(API_ENDPOINTS.DELETE_INCOME(id));
+            // khi xóa status trả về 204 no content không trả về 200
+            if(response.status === 204){
+                setOpenDeleteAlert({show: false, data: null});
+                toast.success('Income deleted successfully.');
+                fetchIncomeDetails();
+                fetchIncomeCategories();
+            }
+        } catch (error) {
+            console.log('error deleting income', error);
+            toast.error('Failed to delete income. Please try again.', error.message);
+        }
+    }
+
     useEffect(() => {
         fetchIncomeDetails();
         fetchIncomeCategories();
@@ -104,9 +122,11 @@ const Income = () => {
                             Add Income
                         </button>
                     </div>
+
+                    {/* Income List and Delete Button */}
                     <IncomeList
                         transactions={incomeData}
-                        onDelete={(id) => console.log('deleting the income', id)}
+                        onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
                     />
 
                     {/* Add Income Modal */}
@@ -118,6 +138,18 @@ const Income = () => {
                         <AddInComeForm 
                             onAddIncome={(income) => handleAddIncome(income)}
                             categories={categories}
+                        />
+                    </Modal>
+
+                    {/* Delete Income Modal */}
+                    <Modal
+                        isOpen={openDeleteAlert.show}
+                        onClose={() => setOpenDeleteAlert({show: false, data: null})}
+                        title='Delete Income'
+                    >
+                        <DeleteAlert 
+                            content = 'Are you sure want to delete this income ?'
+                            onDelete={() => deleteIncome(openDeleteAlert.data)}
                         />
                     </Modal>
                 </div>

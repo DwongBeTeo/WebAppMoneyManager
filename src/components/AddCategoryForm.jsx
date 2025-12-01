@@ -18,7 +18,8 @@ const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing, onClose
     useEffect(() => {
         if(isEditing && initialCategoryData) {
             setCategory(initialCategoryData);
-        } else {
+        } 
+        else {
             setCategory({
                 name: "",
                 type: "income",
@@ -33,6 +34,7 @@ const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing, onClose
         {value: 'expense', label: 'Expense'},
     ]
     const handleChange = (key, value) => {
+        console.log('Handle change:', key, value);
         setCategory({...category, [key]: value});
     }
 
@@ -72,6 +74,7 @@ const AddCategoryForm = ({onAddCategory, initialCategoryData, isEditing, onClose
                 onChange={({target}) => handleChange('type', target.value)}
                 isSelect={true}
                 options={categoryTypeOption}
+                disabled={isEditing}
             />
 
             <div className="flex justify-end mt-6">

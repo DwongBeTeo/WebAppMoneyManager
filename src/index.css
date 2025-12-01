@@ -17,6 +17,9 @@
   .add-btn {
     @apply px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700;
   }
+  .add-btn-fill {
+    @apply flex items-center justify-center gap-2
+  }
 }
 
 body{
@@ -25,3 +28,29 @@ body{
   /* background-color: #e9ecef; */
   overflow-x: hidden;
 }
+
+/* Custom scrollbar cho react-select dropdown */
+/* .react-select__menu {
+  max-height: 250px; 
+  overflow-y: auto;
+} */
+
+.react-select__menu::-webkit-scrollbar {
+  width: 6px;  /* Chiều rộng scrollbar mỏng hơn */
+}
+
+.react-select__menu::-webkit-scrollbar-thumb {
+  background-color: #a0a0a0;  /* Màu thumb (kéo) */
+  border-radius: 3px;         /* Bo góc */
+}
+
+.react-select__menu::-webkit-scrollbar-track {
+  background: #f1f1f1;  /* Màu track (nền) */
+}
+
+.react-select__menu-list {
+  max-height: 180px !important;
+  overflow-y: auto !important;
+}
+
+/* End Custom scrollbar */

@@ -48,7 +48,10 @@ const Category = () => {
             toast.error('Category name is required.');
             return;
         }
-
+        if (!type) {
+            toast.error('Category type is required.');
+            return;
+        }
         //check if the category already exists
         const isCategoryExists = categoryData.some((category) => {
             return category.name.toLowerCase() === name.trim().toLowerCase();
@@ -84,8 +87,17 @@ const Category = () => {
 
     const handleUpdateCategory = async (updatedCategory) => {
         const {id ,name, type, icon} = updatedCategory;
+        console.log('Updating category with type:', updatedCategory.type);  // Xem type khi submit edit
         if (!name.trim()) {
             toast.error('Category name is required.');
+            return;
+        }
+        if (!type) {
+            toast.error('Category type is required.');
+            return;
+        }
+        if(!id){
+            toast.error('Category id is required.');
             return;
         }
         try {
@@ -96,6 +108,7 @@ const Category = () => {
             });
             if(response.status === 200){
                 toast.success('Category updated successfully.');
+                setSelectedCategory(null);
                 setOpenEditCategoryModal(false);
                 fetchCategoriesDetails();
             }
