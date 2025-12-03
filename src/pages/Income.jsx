@@ -9,6 +9,7 @@ import { Plus } from "lucide-react";
 import toast from "react-hot-toast";
 import AddInComeForm from "../components/Income/AddIncomeForm";
 import DeleteAlert from "../components/DeleteAlert";
+import IncomeOverview from "../components/Income/IncomeOverView";
 const Income = () => {
     UseUser();
     const [incomeData, setIncome] = useState([]);
@@ -103,6 +104,14 @@ const Income = () => {
         }
     }
 
+    const handleDownloadIncomeDetails = () => {
+        console.log('Download income details');
+    }
+
+    const handleEmailIncomeDetails = () => {
+        console.log('Email income details');
+    }
+
     useEffect(() => {
         fetchIncomeDetails();
         fetchIncomeCategories();
@@ -112,21 +121,29 @@ const Income = () => {
         <Dashboard activeMenu="Income">
             <div className="my-5 mx-auto">
                 <div className="grid grid-cols-1 gap-4">
-                    {/* Add button to add Income */}
                     <div className="flex justify-between items-center mb-5">
                         <h2 className="text-2xl font-semibold">Incomes</h2>
+
+                        {/* Add button to add Income */}
                         <button
-                        onClick={()=> setOpenAddIncomeModal(true)}
-                        className="add-btn flex items-center gap-1">
-                            <Plus size={16} />
-                            Add Income
+                            onClick={()=> setOpenAddIncomeModal(true)}
+                            className="add-btn add-btn-fill"
+                        >
+                                <Plus size={16} />
+                                Add Income
                         </button>
                     </div>
+                    
+                    {/* Overview for income with line char */}
+                    <IncomeOverview transactions={incomeData} />
+                    
 
                     {/* Income List and Delete Button */}
                     <IncomeList
                         transactions={incomeData}
                         onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
+                        onDownload={handleDownloadIncomeDetails}
+                        onEmail={handleEmailIncomeDetails}
                     />
 
                     {/* Add Income Modal */}

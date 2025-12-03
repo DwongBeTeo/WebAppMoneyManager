@@ -15,5 +15,6 @@ export const API_ENDPOINTS = {
     CATEGORY_BY_TYPE: (type) => `/categories/${type}`,
     ADD_INCOME: '/incomes',
     DELETE_INCOME: (incomeId) => `incomes/${incomeId}`,
+    INCOME_EXCEL_DOWNLOAD: 'excel/download/income',
     UPLOAD_IMAGE: `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`
 }

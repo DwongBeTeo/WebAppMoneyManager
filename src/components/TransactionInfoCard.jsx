@@ -1,7 +1,7 @@
 import { BanknoteArrowUp, Trash2, TrendingDown, TrendingUp } from "lucide-react";
 import { addThousandsSeparator } from "../util/addThousandsSeparator";
 
-const TransactionInfoCard = ({icon, title, date, amount, type, hideDeletetn, onDelete}) => {
+const TransactionInfoCard = ({icon, title, date, amount, type, hideDeleteBtn, onDelete}) => {
     const getAmountStyles = () => {
         return type === 'income' 
         ? 'bg-green-100 text-green-800'
@@ -25,7 +25,7 @@ const TransactionInfoCard = ({icon, title, date, amount, type, hideDeletetn, onD
                 </div>
 
                 <div className="flex items-center gap-2">
-                    {!hideDeletetn && (
+                    {!hideDeleteBtn && (
                         <button 
                         // delete ở trong IncomeList và Income.jsx
                             onClick={onDelete}
