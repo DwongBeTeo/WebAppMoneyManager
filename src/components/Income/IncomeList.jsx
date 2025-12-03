@@ -1,16 +1,35 @@
 import { Download, Mail } from "lucide-react";
 import TransactionInfoCard from "../TransactionInfoCard.jsx";
 import moment from "moment";
+import { useState } from "react";
 const IncomeList = ({transactions, onDelete, onDownload, onEmail}) => {
-    return( 
+    const [loading, setLoading] = useState(false);
+    const handleEmail = async () => {
+        setLoading(true);
+        try {
+            await onEmail();
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const handleDownload = async () => {
+        setLoading(true);
+        try {
+            await onDownload();
+        } finally {
+            setLoading(false);
+        }
+    }
+    return(
         <div className="card">
             <div className="flex items-center justify-between">
                 <h5 className="text-lg">Income List</h5>
                 <div className="flex items-center justify-end gap-2">
-                    <button className="card-btn" onClick={onEmail}>
+                    <button className="card-btn" onClick={handleEmail}>
                         <Mail size={20} className="text-base" /> Email
                     </button>
-                    <button className="card-btn" onClick={onDownload}>
+                    <button className="card-btn" onClick={handleDownload}>
                         <Download size={20} className="text-base" /> DownLoad
                     </button>
                 </div>
